@@ -5,7 +5,7 @@ import os
 app = Flask(__name__)
 
 # Configurando a conexão com o PostgreSQL
-app.config['SQLALCHEMY_DATABASE_URI'] = f'postgresql://{os.getenv('USR')}:{os.getenv("PASS")}@{os.getenv("HOST")}:{os.getenv("PORT")}/{os.getenv("DB")}'
+app.config['SQLALCHEMY_DATABASE_URI'] = f"postgresql://{os.getenv('USR')}:{os.getenv('PASS')}@{os.getenv('HOST')}:{os.getenv('PORT')}/{os.getenv('DB')}"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db.init_app(app)
