@@ -14,23 +14,23 @@ db.init_app(app)
 # Função para calcular o rank com base no XP acumulado
 def get_rank(lvl):
     if lvl >= 200:
-        return "Lenda"
+        return "Dragão Preto de olhos Vermelhos"
     elif lvl >= 100:
-        return "Mestre"
+        return "Cetro de Diamante"
     elif lvl >= 70:
-        return "Diamante"
+        return "Cetro de Safira"
     elif lvl >= 45:
-        return "Platina"
+        return "Machado de Batalha de Metal"
     elif lvl >= 30:
-        return "Ouro"
+        return "Machado de Ouro"
     elif lvl >= 20:
-        return "Prata"
+        return "Machado de Prata Duplo"
     elif lvl >= 12:
-        return "Bronze"
+        return "Machado de Prata"
     elif lvl >= 6:
-        return "Ferro"
+        return "Machado de Metal"
     elif lvl >= 2:
-        return "Madeira"
+        return "Martelo de Madeira"
     else:
         return "Unranked"
 
