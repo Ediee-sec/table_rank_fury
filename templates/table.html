@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Table</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 20px;
+        }
+        .header-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .header-container img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 15px;
+        }
+        .header-container h1 {
+            margin: 0;
+            color: #333;
+            font-size: 2.5em;
+        }
+        .filter-container {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .filter-container input {
+            padding: 10px;
+            font-size: 1em;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        th, td {
+            padding: 15px 20px;
+            text-align: left;
+            font-size: 1em;
+        }
+        th {
+            background: linear-gradient(135deg, #6A82FB, #FC5C7D);
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        td {
+            border-bottom: 1px solid #ddd;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+            transition: background-color 0.3s ease;
+        }
+        tr:last-child td {
+            border-bottom: none;
+        }
+        img.user-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 2px solid #6A82FB;
+        }
+        /* Responsividade */
+        @media (max-width: 768px) {
+            table, th, td {
+                display: block;
+                width: 100%;
+            }
+            th {
+                background-color: #6A82FB;
+                font-size: 0.9em;
+            }
+            td {
+                padding: 10px;
+                font-size: 0.9em;
+            }
+            tr {
+                margin-bottom: 10px;
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header-container">
+        <img src="https://i.ibb.co/xYxjFvw/9c3bb649-9038-4113-9543-7c87652aa95a-removebg-preview.png" alt="Icon">
+        <h1>Ranking Discord FURY</h1>
+    </div>
+    <div class="filter-container">
+        <input type="text" id="searchInput" onkeyup="filterTable()" placeholder="Search by username...">
+    </div>
+    <table id="userTable">
+        <thead>
+            <tr>
+                <th>Image</th>
+                <th>Username</th>
+                <th>XP Accumulated</th>
+                <th>Level</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+            <tr>
+                <td><img class="user-img" src="{{ user.img if user.img else 'https://i.ibb.co/xYxjFvw/9c3bb649-9038-4113-9543-7c87652aa95a-removebg-preview.png' }}" alt="{{ user.user_dc }}"></td>
+                <td>{{ user.user_dc }}</td>
+                <td>{{ user.xp_accumulated }}</td>
+                <td>{{ user.lvl }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <script>
+        function filterTable() {
+            const input = document.getElementById('searchInput');
+            const filter = input.value.toUpperCase();
+            const table = document.getElementById('userTable');
+            const rows = table.getElementsByTagName('tr');
+            
+            for (let i = 1; i < rows.length; i++) {
+                const cells = rows[i].getElementsByTagName('td');
+                const usernameCell = cells[1]; // Assume username is in the second column
+                
+                if (usernameCell) {
+                    const usernameText = usernameCell.textContent || usernameCell.innerText;
+                    if (usernameText.toUpperCase().indexOf(filter) > -1) {
+                        rows[i].style.display = '';
+                    } else {
+                        rows[i].style.display = 'none';
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>
