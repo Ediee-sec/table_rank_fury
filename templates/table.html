@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Table</title>
+    <title>Rank dc</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
@@ -84,7 +84,7 @@
                     <th>XP Accumulated</th>
                     <th>Rank</th>
                     <th>Level</th>
-                    <th>Progress to Next Rank</th> <!-- Coluna para o progresso em círculo -->
+                    <th>Progress to Next Level</th> <!-- Coluna para o progresso em círculo -->
                 </tr>
             </thead>
             <tbody id="userTable">
@@ -98,8 +98,12 @@
                     <td>
                         <div class="circular-progress">
                             <svg>
-                                <circle class="back" cx="40" cy="40" r="35"></circle>
-                                <circle class="front" cx="40" cy="40" r="35" style="stroke-dashoffset: calc(440 - (440 * {{ user.progress }} / 100));"></circle>
+                                <!-- Círculo de fundo -->
+                                <circle class="back" cx="40" cy="40" r="35" style="stroke-dasharray: 219.91;"></circle>
+                                <!-- Círculo de progresso -->
+                                <circle class="front" cx="40" cy="40" r="35" 
+                                        style="stroke-dasharray: 219.91; stroke-dashoffset: calc(219.91 - (219.91 * {{ user.progress }} / 100));">
+                                </circle>
                             </svg>
                             <div class="progress-value">{{ user.progress|round(2) }}%</div>
                         </div>
