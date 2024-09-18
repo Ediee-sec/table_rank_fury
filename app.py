@@ -66,7 +66,7 @@ def index():
     
     # Atribui o rank e o progresso para o próximo rank para cada usuário
     for user in users:
-        user.rank, user_img = get_rank(user.lvl)
+        user.rank = get_rank(user.lvl)
         user.progress = get_progress_to_next_rank(user.xp, user.lvl)
     
     return render_template('table.html', users=users)
