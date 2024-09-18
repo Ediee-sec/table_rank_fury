@@ -14,25 +14,40 @@ db.init_app(app)
 # Função para calcular o rank com base no XP acumulado
 def get_rank(lvl):
     if lvl >= 200:
-        return "Dragão Preto de olhos Vermelhos"
-    elif lvl >= 100:
-        return "Cetro de Diamante"
-    elif lvl >= 70:
+        return "Dragão Preto dos olhos Vermelhos"
+    elif lvl >= 135:
+        return "Dragão Ambar"
+    elif lvl >= 105:
+        return "Cetro de Diamante Negro"
+    elif lvl >= 80:
+        return "Cetro de Ruby"
+    elif lvl >= 60:
         return "Cetro de Safira"
     elif lvl >= 45:
-        return "Machado de Batalha de Metal"
-    elif lvl >= 30:
+        return "Cetro de Violeta"
+    elif lvl >= 37:
+        return "Machado de Ouro Duplo"
+    elif lvl >= 32:
         return "Machado de Ouro"
-    elif lvl >= 20:
+    elif lvl >= 24:
         return "Machado de Prata Duplo"
-    elif lvl >= 12:
+    elif lvl >= 20:
         return "Machado de Prata"
-    elif lvl >= 6:
+    elif lvl >= 14:
+        return "Machado de Metal Duplo"
+    elif lvl >= 12:
         return "Machado de Metal"
+    elif lvl >= 9:
+        return "Martelo de Pedra Duplo"
+    elif lvl >= 7:
+        return "Martelo de Pedra"
+    elif lvl >= 4:
+        return "Martelo de Madeira Duplo"
     elif lvl >= 2:
         return "Martelo de Madeira"
     else:
         return "Unranked"
+
 
 
 def get_progress_to_next_rank(current_xp, level):
@@ -51,7 +66,7 @@ def index():
     
     # Atribui o rank e o progresso para o próximo rank para cada usuário
     for user in users:
-        user.rank = get_rank(user.lvl)
+        user.rank, user_img = get_rank(user.lvl)
         user.progress = get_progress_to_next_rank(user.xp, user.lvl)
     
     return render_template('table.html', users=users)
