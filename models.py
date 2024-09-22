@@ -10,7 +10,7 @@ class User(db.Model):
     xp = db.Column(db.Integer, nullable=False)
     xp_accumulated = db.Column(db.Integer, nullable=False)
     lvl = db.Column(db.Integer, nullable=False)
-    timer = db.Column(db.DateTime, nullable=False)
+    #timer = db.Column(db.DateTime, nullable=False)
     server_id = db.Column(db.Integer, nullable=False)
 
     def __init__(self, avatar_url, username, points_1, points_2, status):
