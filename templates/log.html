@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Activity Log</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f0f2f5;
+            padding: 20px;
+        }
+        .table-container {
+            max-width: 1200px;
+            margin: auto;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        .table thead th {
+            background-color: #343a40;
+            color: #fff;
+        }
+        .table tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .input-container {
+            margin-bottom: 20px; /* Espaço entre o campo e a tabela */
+        }
+        .input-container input {
+            margin-right: 50px; /* Espaço entre os campos */
+        }
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .btn-custom {
+            background-color: #b94010; /* Cor desejada */
+            color: #fff; /* Cor do texto */
+        }
+        .btn-custom:hover {
+            background-color: #882b07; /* Cor ao passar o mouse */
+        }
+    </style>
+</head>
+<body>
+    <div class="container table-container">
+        <div class="header-container mb-4">
+            <h1>User Activity Log</h1>
+            <a href="/rank" class="btn btn-custom">Ver Rank</a> <!-- Botão para redirecionar para /rank -->
+        </div>
+        <div class="d-flex input-container">
+            <input type="text" id="searchInput" onkeyup="filterTable()" class="form-control" placeholder="Search by user..." style="flex: 1;">
+            <input type="text" id="dateInput" onkeyup="filterDate()" class="form-control" placeholder="dd/mm/yyyy" style="flex: 1;">
+        </div>
+        <table class="table table-striped table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Datetime</th>
+                    <th>User</th>
+                    <th>Type</th>
+                    <th>XP</th>
+                    <th>Multiplier</th>
+                    <th>XP Multiplier</th>
+                    <th>Level</th>
+                    <th>Channel</th>
+                </tr>
+            </thead>
+            <tbody id="logTable">
+                {% for log in logs %}
+                <tr>
+                    <td>{{ log.datetime }}</td>
+                    <td>{{ log.user }}</td>
+                    <td>{{ log.type }}</td>
+                    <td>{{ log.xp }}</td>
+                    <td>{{ log.multiplier }}</td>
+                    <td>{{ log.xp_multiplied }}</td>
+                    <td>{{ log.level }}</td>
+                    <td>{{ log.channel }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        function filterTable() {
+            const input = document.getElementById('searchInput');
+            const filter = input.value.toUpperCase();
+            const table = document.getElementById('logTable');
+            const rows = table.getElementsByTagName('tr');
+
+            for (let i = 0; i < rows.length; i++) {
+                const cells = rows[i].getElementsByTagName('td');
+                const userCell = cells[1]; // Assume user is in the second column
+
+                if (userCell) {
+                    const userText = userCell.textContent || userCell.innerText;
+                    rows[i].style.display = userText.toUpperCase().indexOf(filter) > -1 ? '' : 'none';
+                }
+            }
+        }
+
+        function filterDate() {
+            const input = document.getElementById('dateInput');
+            const filter = input.value;
+        
+            // Verifica se o campo de data não está vazio
+            if (!filter) {
+                return; // Se vazio, não filtra nada
+            }
+        
+            // Divide a data inserida para reformatar
+            const [day, month, year] = filter.split('/');
+            const formattedFilter = `${year}-${month}-${day}`; // Transforma para yyyy-mm-dd
+        
+            const table = document.getElementById('logTable');
+            const rows = table.getElementsByTagName('tr');
+        
+            for (let i = 0; i < rows.length; i++) {
+                const cells = rows[i].getElementsByTagName('td');
+                const dateCell = cells[0]; // Assume datetime é a primeira coluna
+        
+                if (dateCell) {
+                    const dateText = dateCell.textContent || dateCell.innerText;
+                    const dateToCheck = dateText.split(' ')[0]; // Pega apenas a parte da data
+                    const [cellDay, cellMonth, cellYear] = dateToCheck.split('/');
+                    const formattedCellDate = `${cellYear}-${cellMonth}-${cellDay}`; // Transforma para yyyy-mm-dd
+                    rows[i].style.display = formattedCellDate === formattedFilter ? '' : 'none';
+                }
+            }
+        }
+    </script>
+</body>
+</html>

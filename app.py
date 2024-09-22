@@ -1,5 +1,5 @@
 from flask import Flask, render_template
-from models import db, User
+from models import db, User, Log
 import os
 
 app = Flask(__name__)
@@ -62,7 +62,7 @@ def get_progress_to_next_rank(current_xp, level):
 
 
 # Rota principal
-@app.route('/')
+@app.route('/rank')
 def index():
     # Consulta todos os usuários da tabela e ordena pelo campo 'xp_accumulated'
     users = User.query.order_by(User.xp_accumulated.desc()).all()
@@ -74,6 +74,13 @@ def index():
         user.progress = get_progress_to_next_rank(user.xp, user.lvl)
     
     return render_template('table.html', users=users)
+
+@app.route('/log')
+def log_table():
+    # Consulta todos os registros da tabela 'user_activity_log'
+    logs = Log.query.order_by(Log.datetime.desc()).all()
+    
+    return render_template('log.html', logs=logs)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True, use_debugger=True, use_reloader=False)

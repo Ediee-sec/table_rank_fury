@@ -65,8 +65,6 @@
             stroke-dashoffset: 440;
             transition: stroke-dashoffset 0.5s ease;
         }
-
-        /* Estilo dos círculos de rank */
         .rank-circle {
             display: flex;
             align-items: center;
@@ -79,8 +77,6 @@
             color: #fff;
             text-align: center;
         }
-
-        /* Coloração do Rank */
         .top1 {
             background-color: #FFD700; /* Ouro */
         }
@@ -93,13 +89,23 @@
         .top-default {
             background-color: #808080; /* Cinza */
         }
+        .btn-custom {
+            background-color: #b94010; /* Cor desejada */
+            color: #fff; /* Cor do texto */
+        }
+        .btn-custom:hover {
+            background-color: #882b07; /* Cor ao passar o mouse */
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="d-flex align-items-center justify-content-center mb-4">
-            <img src="https://i.ibb.co/xYxjFvw/9c3bb649-9038-4113-9543-7c87652aa95a-removebg-preview.png" alt="Icon" class="mr-3" style="width: 40px; height: 40px;">
-            <h1 class="display-4 mb-0">Ranking Discord FURY</h1>
+        <div class="d-flex align-items-center justify-content-between mb-4">
+            <div class="d-flex align-items-center">
+                <img src="https://i.ibb.co/xYxjFvw/9c3bb649-9038-4113-9543-7c87652aa95a-removebg-preview.png" alt="Icon" class="mr-3" style="width: 40px; height: 40px;">
+                <h1 class="display-4 mb-0">Ranking Discord FURY</h1>
+            </div>
+            <a href="/log" class="btn btn-custom">Ver Log</a> <!-- Botão para redirecionar para /log -->
         </div>
         <div class="mb-4 text-center">
             <input type="text" id="searchInput" onkeyup="filterTable()" class="form-control" placeholder="Search by username...">
@@ -125,8 +131,7 @@
                             {% elif loop.index <= 3 %} top2-3
                             {% elif loop.index <= 10 %} top4-10
                             {% else %} top-default
-                            {% endif %}
-                        ">
+                            {% endif %}">
                             {{ loop.index }}
                         </div>
                     </td>
@@ -138,9 +143,7 @@
                     <td>
                         <div class="circular-progress">
                             <svg>
-                                <!-- Círculo de fundo -->
                                 <circle class="back" cx="40" cy="40" r="35" style="stroke-dasharray: 219.91;"></circle>
-                                <!-- Círculo de progresso -->
                                 <circle class="front" cx="40" cy="40" r="35" 
                                         style="stroke-dasharray: 219.91; stroke-dashoffset: calc(219.91 - (219.91 * {{ user.progress }} / 100));">
                                 </circle>
