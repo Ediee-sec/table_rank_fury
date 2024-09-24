@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, jsonify
 from models import db, User, Log
 import os
 
@@ -6,7 +6,6 @@ app = Flask(__name__)
 
 # Configurando a conexão com o PostgreSQL
 app.config['SQLALCHEMY_DATABASE_URI'] = f"postgresql://{os.getenv('USR')}:{os.getenv('PASS')}@{os.getenv('HOST')}:{os.getenv('PORT')}/{os.getenv('DB')}"
-
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db.init_app(app)
@@ -20,7 +19,7 @@ def get_rank(lvl):
     elif lvl >= 105:
         return ["Cetro de Diamante Negro", "static/img/cetro_diamante.png"]
     elif lvl >= 80:
-        return ["Cetro de Ruby","static/img/cetro_ruby.png"]
+        return ["Cetro de Ruby", "static/img/cetro_ruby.png"]
     elif lvl >= 60:
         return ["Cetro de Safira", "static/img/cetro_safira.png"]
     elif lvl >= 45:
@@ -44,22 +43,14 @@ def get_rank(lvl):
     elif lvl >= 4:
         return ["Martelo de Madeira Duplo", "static/img/martelo_de_madeira_duplo.png"]
     elif lvl >= 2:
-        return ["Martelo de Madeira","static/img/martelo_de_madeira.png"]
+        return ["Martelo de Madeira", "static/img/martelo_de_madeira.png"]
     else:
         return ["Iniciante", "static/img/iniciante.png"]
-    
-
-    
-
-
 
 def get_progress_to_next_rank(current_xp, level):
     xp_for_next_rank = (level + 1) * 1024
     progress = (current_xp / xp_for_next_rank) * 100
-    
     return max(0, min(progress, 100))
-
-
 
 # Rota principal
 @app.route('/rank')
@@ -79,8 +70,43 @@ def index():
 def log_table():
     # Consulta todos os registros da tabela 'user_activity_log'
     logs = Log.query.order_by(Log.datetime.desc()).all()
-    
     return render_template('log.html', logs=logs)
+
+@app.route('/get_user_logs')
+def get_user_logs():
+    user_name = request.args.get('user', '').lower()
+    date = request.args.get('date', '')  # Captura a data, se fornecida
+
+    # Inicializa a consulta de logs
+    query = Log.query
+
+    if user_name:
+        # Busca logs onde o nome do usuário contém a substring fornecida
+        query = query.filter(Log.user.ilike(f'%{user_name}%'))
+
+    if date:
+        # Filtra os logs pela data, se a data foi fornecida
+        query = query.filter(Log.datetime.cast(db.Date) == date)
+
+    # Executa a consulta e obtém todos os logs filtrados
+    logs = query.order_by(Log.datetime.desc()).all()
+
+    # Formata os logs para envio
+    filtered_logs = [
+        {
+            'datetime': log.datetime,
+            'user': log.user,
+            'type': log.type,
+            'xp': log.xp,
+            'multiplier': float(log.multiplier),
+            'xp_multiplied': log.xp_multiplied,
+            'level': log.level,
+            'channel': log.channel,
+        }
+        for log in logs
+    ]
+    
+    return jsonify(filtered_logs)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True, use_debugger=True, use_reloader=False)

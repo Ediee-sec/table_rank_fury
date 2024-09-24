@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -102,24 +102,24 @@
     <div class="container">
         <div class="d-flex align-items-center justify-content-between mb-4">
             <div class="d-flex align-items-center">
-                <img src="https://i.ibb.co/xYxjFvw/9c3bb649-9038-4113-9543-7c87652aa95a-removebg-preview.png" alt="Icon" class="mr-3" style="width: 40px; height: 40px;">
+                <img src="https://i.ibb.co/xYxjFvw/9c3bb649-9038-4113-9543-7c87652aa95a-removebg-preview.png" alt="Ícone" class="mr-3" style="width: 40px; height: 40px;">
                 <h1 class="display-4 mb-0">Ranking Discord FURY</h1>
             </div>
             <a href="/log" class="btn btn-custom">Ver Log</a> <!-- Botão para redirecionar para /log -->
         </div>
         <div class="mb-4 text-center">
-            <input type="text" id="searchInput" onkeyup="filterTable()" class="form-control" placeholder="Search by username...">
+            <input type="text" id="searchInput" onkeyup="filterTable()" class="form-control" placeholder="Pesquisar por nome de usuário...">
         </div>
         <table class="table table-striped table-bordered">
             <thead class="thead-dark">
                 <tr>
                     <th>#</th> <!-- Campo de numeração de rank -->
-                    <th>Image</th>
-                    <th>Username</th>
-                    <th>XP Accumulated</th>
-                    <th>Rank Name</th>
-                    <th>Level</th>
-                    <th>Progress to Next Level</th> <!-- Coluna para o progresso em círculo -->
+                    <th>Imagem</th>
+                    <th>Nome de Usuário</th>
+                    <th>XP Acumulado</th>
+                    <th>Nome do Rank</th>
+                    <th>Nível</th>
+                    <th>Progresso para o Próximo Nível</th> <!-- Coluna para o progresso em círculo -->
                 </tr>
             </thead>
             <tbody id="userTable">
@@ -168,7 +168,7 @@
             
             for (let i = 0; i < rows.length; i++) {
                 const cells = rows[i].getElementsByTagName('td');
-                const usernameCell = cells[2]; // Assume username is in the third column
+                const usernameCell = cells[2]; // Assume o nome de usuário está na terceira coluna
                 
                 if (usernameCell) {
                     const usernameText = usernameCell.textContent || usernameCell.innerText;
