@@ -25,7 +25,7 @@ def get_rank(lvl):
     elif lvl >= 80:
         return ["Cetro de Diamante Negro", "static/img/cetro_diamante_negro.png"]
     elif lvl >= 75:
-        return ["Cetro de Ruby", "static/img/cetro_ruby.png"]
+        return ["Cetro de Rubi", "static/img/cetro_ruby.png"]
     elif lvl >= 70:
         return ["Cetro de Safira", "static/img/cetro_safira.png"]
     elif lvl >= 65:
@@ -40,27 +40,27 @@ def get_rank(lvl):
         return ["Estrela de Prata", "static/img/estrela_prata.png"]
     elif lvl >= 41:
         return ["Estrela de Bronze", "static/img/estrela_bronze.png"]
-    elif lvl >= 50:
+    elif lvl >= 36:
         return ["Machado de Ouro com Duas Lâminas", "static/img/machado_de_ouro_com_duas_laminas.png"]
-    elif lvl >= 45:
+    elif lvl >= 31:
         return ["Machado de Prata com Duas Lâminas", "static/img/machado_de_prata_com_duas_laminas.png"]
-    elif lvl >= 40:
+    elif lvl >= 27:
         return ["Machado de Metal com Duas Lâminas", "static/img/machado_de_metal_com_duas_laminas.png"]
-    elif lvl >= 35:
+    elif lvl >= 23:
         return ["Machado de Ouro Duplo", "static/img/machado_de_ouro_duplo.png"]
-    elif lvl >= 32:
-        return ["Machado de Ouro", "static/img/machado_de_ouro.png"]
-    elif lvl >= 24:
-        return ["Machado de Prata Duplo", "static/img/machado_de_prata_duplo.png"]
     elif lvl >= 20:
+        return ["Machado de Ouro", "static/img/machado_de_ouro.png"]
+    elif lvl >= 18:
+        return ["Machado de Prata Duplo", "static/img/machado_de_prata_duplo.png"]
+    elif lvl >= 15:
         return ["Machado de Prata", "static/img/machado_de_prata.png"]
-    elif lvl >= 14:
-        return ["Machado de Metal Duplo", "static/img/machado_de_metal_duplo.png"]
     elif lvl >= 12:
+        return ["Machado de Metal Duplo", "static/img/machado_de_metal_duplo.png"]
+    elif lvl >= 10:
         return ["Machado de Metal", "static/img/machado_de_metal.png"]
-    elif lvl >= 9:
+    elif lvl >= 8:
         return ["Martelo de Pedra Duplo", "static/img/martelo_de_pedra_duplo.png"]
-    elif lvl >= 7:
+    elif lvl >= 6:
         return ["Martelo de Pedra", "static/img/martelo_de_pedra.png"]
     elif lvl >= 4:
         return ["Martelo de Madeira Duplo", "static/img/martelo_de_madeira_duplo.png"]
@@ -68,6 +68,7 @@ def get_rank(lvl):
         return ["Martelo de Madeira", "static/img/martelo_de_madeira.png"]
     else:
         return ["Iniciante", "static/img/iniciante.png"]
+
 
 
 
