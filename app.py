@@ -12,19 +12,41 @@ db.init_app(app)
 
 # Função para calcular o rank com base no XP acumulado
 def get_rank(lvl):
-    if lvl >= 200:
-        return ["Dragão Preto dos olhos Vermelhos", "static/img/dragao_preto.png"]
-    elif lvl >= 135:
-        return ["Dragão Ambar", "static/img/dragao_ambar.png"]
-    elif lvl >= 105:
-        return ["Cetro de Diamante Negro", "static/img/cetro_diamante.png"]
+    if lvl >= 100:
+        return ["Dragão Preto dos Olhos Vermelhos", "static/img/dragao_preto.png"]
+    elif lvl >= 96:
+        return ["Medalha de Ouro", "static/img/medalha_ouro.png"]
+    elif lvl >= 93:
+        return ["Medalha de Prata", "static/img/medalha_prata.png"]
+    elif lvl >= 90:
+        return ["Medalha de Bronze", "static/img/medalha_bronze.png"]
+    elif lvl >= 85:
+        return ["Cetro de Diamante Puro", "static/img/cetro_diamante_puro.png"]
     elif lvl >= 80:
+        return ["Cetro de Diamante Negro", "static/img/cetro_diamante_negro.png"]
+    elif lvl >= 75:
         return ["Cetro de Ruby", "static/img/cetro_ruby.png"]
-    elif lvl >= 60:
+    elif lvl >= 70:
         return ["Cetro de Safira", "static/img/cetro_safira.png"]
-    elif lvl >= 45:
+    elif lvl >= 65:
         return ["Cetro de Violeta", "static/img/cetro_violeta.png"]
-    elif lvl >= 37:
+    elif lvl >= 60:
+        return ["Três Estrelas de Ouro", "static/img/tres_estrelas_ouro.png"]
+    elif lvl >= 56:
+        return ["Duas Estrelas de Ouro", "static/img/duas_estrelas_ouro.png"]
+    elif lvl >= 51:
+        return ["Estrela de Ouro", "static/img/estrela_ouro.png"]
+    elif lvl >= 46:
+        return ["Estrela de Prata", "static/img/estrela_prata.png"]
+    elif lvl >= 41:
+        return ["Estrela de Bronze", "static/img/estrela_bronze.png"]
+    elif lvl >= 50:
+        return ["Machado de Ouro com Duas Lâminas", "static/img/machado_de_ouro_com_duas_laminas.png"]
+    elif lvl >= 45:
+        return ["Machado de Prata com Duas Lâminas", "static/img/machado_de_prata_com_duas_laminas.png"]
+    elif lvl >= 40:
+        return ["Machado de Metal com Duas Lâminas", "static/img/machado_de_metal_com_duas_laminas.png"]
+    elif lvl >= 35:
         return ["Machado de Ouro Duplo", "static/img/machado_de_ouro_duplo.png"]
     elif lvl >= 32:
         return ["Machado de Ouro", "static/img/machado_de_ouro.png"]
@@ -46,6 +68,8 @@ def get_rank(lvl):
         return ["Martelo de Madeira", "static/img/martelo_de_madeira.png"]
     else:
         return ["Iniciante", "static/img/iniciante.png"]
+
+
 
 def get_progress_to_next_rank(current_xp, level):
     xp_for_next_rank = (level + 1) * 1024
